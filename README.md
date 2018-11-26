@@ -20,3 +20,6 @@ go get github.com/jinzhu/gorm
 # 各種コマンド等
 ## サーバ起動
 go run main.go
+
+# DB
+DBとテーブルを作成しておく(TODO：手動作成してるとこをいい感じにしたい)
