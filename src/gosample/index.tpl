@@ -7,13 +7,13 @@
     <form method="post" action="/addTask" >
       TODO：<input type="text" name="task">
       <input type="submit" name="Submit" value="登録" />
-    </form>
-    <ul>
-      {{ range . }}
-      <li>
-        <input type="checkbox" name="todo" value="{{ . }}">{{ . }}
-      </li>
-      {{ end }}
-    </ul>
+    <!-- </form> -->
+    <!-- <ul> -->
+    <!--   {{ range . }} -->
+    <!--   <li> -->
+    <!--     <input type="checkbox" name="todo" value="{{ . }}">{{ . }} -->
+    <!--   </li> -->
+    <!--   {{ end }} -->
+    <!-- </ul> -->
   </body>
 </html>
