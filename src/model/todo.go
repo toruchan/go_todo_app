@@ -1,4 +1,4 @@
-package models
+package model
 
 import(
 	"github.com/wcl48/valval"
@@ -19,6 +19,10 @@ type Todo struct {
     DeletedAt time.Time
 }
 
+func NewTodo() Todo {
+  return Todo{}
+}
+
 func TodoValidate(todo Todo)(error){
     Validator := valval.Object(valval.M{
         "Todo": valval.String(
@@ -31,8 +35,17 @@ func TodoValidate(todo Todo)(error){
     return Validator.Validate(todo)
 }
 func InsertTask(todo string){
-	db, _ := gorm.Open("mysql", "root:password@/go_tutorial")
-	db.Create(&Todo{0,todo,false,time.Now(),time.Now(),time.Now()})
+	db, _ := gorm.Open("mysql", "root:@/go_tutorial")
+	eventEx := Todo{}
+	eventEx.Id = 0
+	eventEx.Todo = todo
+	eventEx.DeletedFlag = false
+	eventEx.CreatedAt = time.Now()
+	eventEx.UpdatedAT = time.Now()
+	eventEx.DeletedAt = time.Now()
+	
+	//db.Create(&Todo{0,todo,false,time.Now(),time.Now(),time.Now()})
+	db.Create(&eventEx)
 }
 
 func FindAll() *sql.Rows {
@@ -46,7 +59,7 @@ func FindAll() *sql.Rows {
 func SelectAll()(map[int]string) {
 	todos := map[int]string{}
 	flag := 0
-	db, err := sql.Open("mysql", "root:password@/go_tutorial")
+	db, err := sql.Open("mysql", "root:@/go_tutorial")
 	if err != nil {
 		fmt.Println(err)
 	}

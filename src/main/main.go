@@ -1,6 +1,7 @@
 package main
 
 import (
+	"../controller"
 	"net/http"
 	"github.com/gin-gonic/gin"
 )
@@ -8,16 +9,26 @@ import (
 func main() {
 	router := gin.Default()
 
-	router.LoadHTMLGlob("gosample/*")
+	router.LoadHTMLGlob("view/*")
 
 	router.GET("/", func(c *gin.Context) {
+		todos := controller.GetAll()
+
+		//todos := ctrl.GetAll()
+
 		c.HTML(http.StatusOK, "index.tpl", gin.H{
-			//"tasks": tasks,
+			"todos": todos,
 		})
     })
-	router.Run(":8080")
-    // http.HandleFunc("/", controller.IndexGET)
-	// http.HandleFunc("/addTask", controller.AddTask)
-    // http.ListenAndServe(":8080", nil)
+
+	router.POST("/", func(c *gin.Context) {
+		text := c.PostForm("task")
+		controller.AddTask(text)
+		todos := controller.GetAll()
+		c.HTML(http.StatusOK, "index.tpl", gin.H{
+			"todos": todos,
+		})
+	})
 	
+	router.Run(":8080")
 }

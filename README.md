@@ -13,6 +13,9 @@ export PATH=$PATH:$GOPATH/bin
 ## 必要なライブラリ追加
 go get golang.org/x/tools/cmd/goimports
 go get github.com/gin-gonic/gin
+go get github.com/wcl48/valval
+go get github.com/go-sql-driver/mysql
+go get github.com/jinzhu/gorm
 
 # 各種コマンド等
 ## サーバ起動
