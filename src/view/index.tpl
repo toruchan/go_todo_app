@@ -11,7 +11,7 @@
     <ul>
       {{ range $task := .todos }}
       <li>
-        <input type="checkbox" name="todo" value="{{ $task }}">{{ $task }}
+        <input type="checkbox" name="todo" value="{{ $task.Id }}">{{ $task.Todo }}
       </li>
       {{ end }}
     </ul>

@@ -11,7 +11,7 @@ import(
 )
 
 type Todo struct {
-    Id int64
+    Id int
     Todo string `sql:"size:255"`
 	DeletedFlag bool
     CreatedAt time.Time
@@ -43,7 +43,6 @@ func InsertTask(todo string){
 	eventEx.CreatedAt = time.Now()
 	eventEx.UpdatedAT = time.Now()
 	eventEx.DeletedAt = time.Now()
-	
 	//db.Create(&Todo{0,todo,false,time.Now(),time.Now(),time.Now()})
 	db.Create(&eventEx)
 }
@@ -56,8 +55,8 @@ func FindAll() *sql.Rows {
 	return eventsEx
 }
 
-func SelectAll()(map[int]string) {
-	todos := map[int]string{}
+func SelectAll()(map[int]*Todo) {
+	todo_map := map[int]*Todo{}
 	flag := 0
 	db, err := sql.Open("mysql", "root:@/go_tutorial")
 	if err != nil {
@@ -74,7 +73,20 @@ func SelectAll()(map[int]string) {
 		if err != nil {
 			fmt.Println(err)
 		}
-		todos[id] = todo
+		todo_map[id] = &Todo{ Id: id, Todo: todo }
 	}
-	return todos
+	return todo_map
+}
+
+func DeleteTask(todo string){
+	db, _ := gorm.Open("mysql", "root:@/go_tutorial")
+	eventEx := Todo{}
+	eventEx.Id = 0
+	eventEx.Todo = todo
+	eventEx.DeletedFlag = false
+	eventEx.CreatedAt = time.Now()
+	eventEx.UpdatedAT = time.Now()
+	eventEx.DeletedAt = time.Now()
+	//db.Create(&Todo{0,todo,false,time.Now(),time.Now(),time.Now()})
+	db.Create(&eventEx)
 }

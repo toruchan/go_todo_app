@@ -9,7 +9,7 @@ import (
 func main() {
 	router := gin.Default()
 
-	router.LoadHTMLGlob("view/*")
+	router.LoadHTMLGlob("src/view/*")
 
 	router.GET("/", func(c *gin.Context) {
 		todos := controller.GetAll()
