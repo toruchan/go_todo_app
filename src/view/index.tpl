@@ -12,6 +12,7 @@
       {{ range $task := .todos }}
       <li>
         <input type="checkbox" name="todo" value="{{ $task.Id }}">{{ $task.Todo }}
+        <input type="submit" value="削除">
       </li>
       {{ end }}
     </ul>
