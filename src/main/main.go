@@ -29,6 +29,16 @@ func main() {
 			"todos": todos,
 		})
 	})
+
+	router.POST("/hoge", func(c *gin.Context) {
+		//text := c.PostForm("task")
+		controller.AddTask("deldel")
+		todos := controller.GetAll()
+		c.HTML(http.StatusOK, "index.tpl", gin.H{
+			"todos": todos,
+		})
+	})
+
 	
 	router.Run(":8080")
 }
